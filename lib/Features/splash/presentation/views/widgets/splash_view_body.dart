@@ -1,9 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../../core/utils/assets.dart';
+import 'logo_widget.dart';
+import 'sliding_text.dart';
 
-class SplashViewBody extends StatelessWidget {
+class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
+
+  @override
+  State<SplashViewBody> createState() => _SplashViewBodyState();
+}
+
+class _SplashViewBodyState extends State<SplashViewBody>
+    with SingleTickerProviderStateMixin {
+  late AnimationController animationController;
+  late Animation<Offset> slideAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
+    slideAnimation = Tween<Offset>(
+      begin: Offset(0, 5),
+      end: Offset(0, 0),
+    ).animate(animationController);
+    animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    animationController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,25 +42,8 @@ class SplashViewBody extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const LogoWidget(),
-        const Text(
-          'Read Free Books',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 17),
-        ),
+        SlidingText(slideAnimation: slideAnimation),
       ],
-    );
-  }
-}
-
-class LogoWidget extends StatelessWidget {
-  const LogoWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SvgPicture.asset(
-      AssetsData.logo,
-      width: 250,
-      colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcATop),
     );
   }
 }
