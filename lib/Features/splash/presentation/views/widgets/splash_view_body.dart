@@ -1,7 +1,7 @@
 import 'package:bookly_app/Features/home/presentation/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'logo_widget.dart';
+import '../../../../../core/widgets/logo_widget.dart';
 import 'sliding_text.dart';
 
 class SplashViewBody extends StatefulWidget {
@@ -42,7 +42,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const LogoWidget(),
+        const LogoWidget(width: 300),
         SlidingText(slideAnimation: slideAnimation),
       ],
     );
