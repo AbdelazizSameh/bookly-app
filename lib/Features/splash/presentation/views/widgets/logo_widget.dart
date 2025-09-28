@@ -9,7 +9,7 @@ class LogoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SvgPicture.asset(
       AssetsData.logo,
-      width: 250,
+      width: 300,
       colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcATop),
     );
   }
