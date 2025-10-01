@@ -28,7 +28,6 @@ class HomeViewBody extends StatelessWidget {
             ),
           ),
           const BestSellerBooksListView(),
-          SliverToBoxAdapter(child: const SizedBox(height: 21)),
         ],
       ),
     );
