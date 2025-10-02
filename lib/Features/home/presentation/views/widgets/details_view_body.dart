@@ -12,28 +12,31 @@ class DetailsViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.sizeOf(context).width;
     return SafeArea(
-      child: Column(
-        children: [
-          const CustomBookDetailsAppBar(),
-          SizedBox(width: screenWidth * 0.38, child: const CustomBookItem()),
-          const SizedBox(height: 43),
-          Text(
-            'The Jungle Book',
-            style: Styles.textStyle30.copyWith(fontWeight: FontWeight.w600),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            'Rudyard Kipling',
-            style: Styles.textStyle18.copyWith(
-              color: const Color(0xffB8B6BD),
-              fontStyle: FontStyle.italic,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30.0),
+        child: Column(
+          children: [
+            const CustomBookDetailsAppBar(),
+            SizedBox(width: screenWidth * 0.38, child: const CustomBookItem()),
+            const SizedBox(height: 43),
+            Text(
+              'The Jungle Book',
+              style: Styles.textStyle30.copyWith(fontWeight: FontWeight.w600),
             ),
-          ),
-          const SizedBox(height: 18),
-          const BookRating(mainAxisAlignment: MainAxisAlignment.center),
-          const SizedBox(height: 37),
-          const BooksAction(),
-        ],
+            const SizedBox(height: 6),
+            Text(
+              'Rudyard Kipling',
+              style: Styles.textStyle18.copyWith(
+                color: const Color(0xffB8B6BD),
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+            const SizedBox(height: 18),
+            const BookRating(mainAxisAlignment: MainAxisAlignment.center),
+            const SizedBox(height: 37),
+            const BooksAction(),
+          ],
+        ),
       ),
     );
   }
