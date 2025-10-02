@@ -2,6 +2,7 @@ import 'package:bookly_app/Features/home/presentation/views/widgets/custom_book_
 import 'package:bookly_app/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'book_rating.dart';
+import 'books_action.dart';
 import 'custom_book_item.dart';
 
 class DetailsViewBody extends StatelessWidget {
@@ -12,7 +13,6 @@ class DetailsViewBody extends StatelessWidget {
     var screenWidth = MediaQuery.sizeOf(context).width;
     return SafeArea(
       child: Column(
-        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const CustomBookDetailsAppBar(),
           SizedBox(width: screenWidth * 0.38, child: const CustomBookItem()),
@@ -31,6 +31,8 @@ class DetailsViewBody extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           const BookRating(mainAxisAlignment: MainAxisAlignment.center),
+          const SizedBox(height: 37),
+          const BooksAction(),
         ],
       ),
     );
