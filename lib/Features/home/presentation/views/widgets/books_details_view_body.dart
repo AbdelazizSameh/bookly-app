@@ -13,41 +13,54 @@ class BooksDetailsViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.sizeOf(context).width;
     return SafeArea(
-      child: Column(
-        children: [
-          const CustomBookDetailsAppBar(),
-          SizedBox(width: screenWidth * 0.38, child: const CustomBookItem()),
-          const SizedBox(height: 43),
-          Text(
-            'The Jungle Book',
-            style: Styles.textStyle30.copyWith(fontWeight: FontWeight.w600),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            'Rudyard Kipling',
-            style: Styles.textStyle18.copyWith(
-              color: const Color(0xffB8B6BD),
-              fontStyle: FontStyle.italic,
+      child: CustomScrollView(
+        slivers: [
+          SliverFillRemaining(
+            child: Column(
+              children: [
+                const CustomBookDetailsAppBar(),
+                SizedBox(
+                  width: screenWidth * 0.38,
+                  child: const CustomBookItem(),
+                ),
+                const SizedBox(height: 43),
+                Text(
+                  'The Jungle Book',
+                  style: Styles.textStyle30.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  'Rudyard Kipling',
+                  style: Styles.textStyle18.copyWith(
+                    color: const Color(0xffB8B6BD),
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+                const SizedBox(height: 18),
+                const BookRating(mainAxisAlignment: MainAxisAlignment.center),
+                const SizedBox(height: 37),
+                const BooksAction(),
+                const Expanded(child: SizedBox(height: 50)),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                  child: Align(
+                    alignment: AlignmentGeometry.centerLeft,
+                    child: Text(
+                      'You can also like',
+                      style: Styles.textStyle14.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 18),
+                const SimilarBooksListView(),
+                const SizedBox(height: 16),
+              ],
             ),
           ),
-          const SizedBox(height: 18),
-          const BookRating(mainAxisAlignment: MainAxisAlignment.center),
-          const SizedBox(height: 37),
-          const BooksAction(),
-          const SizedBox(height: 50),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30.0),
-            child: Align(
-              alignment: AlignmentGeometry.centerLeft,
-              child: Text(
-                'You can also like',
-                style: Styles.textStyle14.copyWith(fontWeight: FontWeight.w600),
-              ),
-            ),
-          ),
-          const SizedBox(height: 18),
-          const SimilarBooksListView(),
-          const SizedBox(height: 16),
         ],
       ),
     );
