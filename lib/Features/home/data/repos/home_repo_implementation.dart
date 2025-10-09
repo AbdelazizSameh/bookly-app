@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import '/core/utils/api_service.dart';
 import '/Features/home/data/models/book_model/book_model.dart';
 import '/core/errors/failure.dart';
@@ -21,10 +22,14 @@ class HomeRepoImplementation implements HomeRepo {
         var model = BookModel.fromJson(item);
         booksList.add(model);
       }
-      print(booksList);
+
       return right(booksList);
     } catch (e) {
-      return left(ServerFailure());
+      if (e is DioException) {
+        return left(ServerFailure.fromDioException(e));
+      } else {
+        return left(ServerFailure(errorMessage: e.toString()));
+      }
     }
   }
 
