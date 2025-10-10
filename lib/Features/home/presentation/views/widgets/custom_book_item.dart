@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/utils/assets.dart';
+import '../../../data/models/book_model/book_model.dart';
 
 class CustomBookItem extends StatelessWidget {
-  const CustomBookItem({super.key});
-
+  const CustomBookItem({super.key, required this.book});
+  final BookModel book;
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
@@ -12,8 +12,11 @@ class CustomBookItem extends StatelessWidget {
         margin: const EdgeInsets.only(top: 12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(13),
-          image: const DecorationImage(
-            image: AssetImage(AssetsData.test),
+          image: DecorationImage(
+            image: NetworkImage(
+              book.volumeInfo!.imageLinks!.thumbnail ??
+                  'https://uolpress.co.uk/wp-content/uploads/2023/04/book_placeholder.png',
+            ),
             fit: BoxFit.fill,
           ),
         ),

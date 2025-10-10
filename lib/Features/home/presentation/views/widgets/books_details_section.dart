@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../../../core/utils/styles.dart';
 import 'book_rating.dart';
 import 'books_action.dart';
-import 'custom_book_item.dart';
 
 class BookDetailsSection extends StatelessWidget {
   const BookDetailsSection({super.key});
@@ -12,7 +11,7 @@ class BookDetailsSection extends StatelessWidget {
     var screenWidth = MediaQuery.sizeOf(context).width;
     return Column(
       children: [
-        SizedBox(width: screenWidth * 0.38, child: const CustomBookItem()),
+        // SizedBox(width: screenWidth * 0.38, child:  CustomBookItem()),
         const SizedBox(height: 43),
         Text(
           'The Jungle Book',

@@ -1,14 +1,14 @@
-import 'package:bookly_app/Features/home/presentation/views/widgets/book_rating.dart';
-import 'package:bookly_app/core/utils/app_router.dart';
+import '/Features/home/data/models/book_model/book_model.dart';
+import '/Features/home/presentation/views/widgets/book_rating.dart';
+import '/core/utils/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../constants.dart';
-import '../../../../../core/utils/assets.dart';
 import '../../../../../core/utils/styles.dart';
 
 class BestSellerBookItem extends StatelessWidget {
-  const BestSellerBookItem({super.key});
-
+  const BestSellerBookItem({super.key, required this.book});
+  final BookModel book;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -22,8 +22,11 @@ class BestSellerBookItem extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  image: const DecorationImage(
-                    image: AssetImage(AssetsData.test),
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      book.volumeInfo!.imageLinks!.thumbnail ??
+                          'https://uolpress.co.uk/wp-content/uploads/2023/04/book_placeholder.png',
+                    ),
                     fit: BoxFit.fill,
                   ),
                 ),

@@ -1,3 +1,4 @@
+import 'package:bookly_app/Features/home/data/models/book_model/book_model.dart';
 import 'package:flutter/material.dart';
 import 'custom_book_item.dart';
 
@@ -12,7 +13,7 @@ class SimilarBooksListView extends StatelessWidget {
         padding: EdgeInsets.only(left: 30, right: 12, top: 0),
         scrollDirection: Axis.horizontal,
         itemCount: 30,
-        itemBuilder: (context, index) => const CustomBookItem(),
+        itemBuilder: (context, index) => CustomBookItem(book: BookModel()),
         separatorBuilder: (BuildContext context, int index) =>
             SizedBox(width: 10),
       ),
