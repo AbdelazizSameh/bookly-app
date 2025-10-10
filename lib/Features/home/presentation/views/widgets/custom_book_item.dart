@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import '../../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../data/models/book_model/book_model.dart';
 
 class CustomBookItem extends StatelessWidget {
@@ -8,16 +10,14 @@ class CustomBookItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 2.4 / 4,
-      child: Container(
-        margin: const EdgeInsets.only(top: 12),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(13),
-          image: DecorationImage(
-            image: NetworkImage(
-              book.volumeInfo!.imageLinks!.thumbnail ??
-                  'https://uolpress.co.uk/wp-content/uploads/2023/04/book_placeholder.png',
-            ),
-            fit: BoxFit.fill,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(13),
+        child: CachedNetworkImage(
+          fit: BoxFit.fill,
+          imageUrl: book.volumeInfo!.imageLinks!.thumbnail as String,
+          errorWidget: (context, url, error) => const ColoredBox(
+            color: Colors.white38,
+            child: Icon(Icons.image_not_supported_outlined),
           ),
         ),
       ),

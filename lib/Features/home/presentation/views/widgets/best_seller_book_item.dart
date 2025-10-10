@@ -1,3 +1,6 @@
+import 'package:bookly_app/core/widgets/custom_loading_indicator.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
 import '/Features/home/data/models/book_model/book_model.dart';
 import '/Features/home/presentation/views/widgets/book_rating.dart';
 import '/core/utils/app_router.dart';
@@ -19,15 +22,14 @@ class BestSellerBookItem extends StatelessWidget {
           children: [
             AspectRatio(
               aspectRatio: 2.6 / 4,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  image: DecorationImage(
-                    image: NetworkImage(
-                      book.volumeInfo!.imageLinks!.thumbnail ??
-                          'https://uolpress.co.uk/wp-content/uploads/2023/04/book_placeholder.png',
-                    ),
-                    fit: BoxFit.fill,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: CachedNetworkImage(
+                  fit: BoxFit.fill,
+                  imageUrl: book.volumeInfo!.imageLinks!.thumbnail as String,
+                  errorWidget: (context, url, error) => const ColoredBox(
+                    color: Colors.white38,
+                    child: Icon(Icons.image_not_supported_outlined),
                   ),
                 ),
               ),

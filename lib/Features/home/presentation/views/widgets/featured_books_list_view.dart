@@ -22,12 +22,12 @@ class FeaturedBooksListView extends StatelessWidget {
               itemBuilder: (context, index) =>
                   CustomBookItem(book: state.books[index]),
               separatorBuilder: (BuildContext context, int index) =>
-                  SizedBox(width: 12),
+                  const SizedBox(width: 12),
             );
           } else if (state is FeaturedBooksFailure) {
             return CustomErrorWidget(errMessage: state.errMessage);
           } else {
-            return CustomLoadingIndicator();
+            return const CustomLoadingIndicator();
           }
         },
       ),
