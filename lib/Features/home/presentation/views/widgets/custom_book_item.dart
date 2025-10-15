@@ -13,7 +13,7 @@ class CustomBookImage extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         child: CachedNetworkImage(
           fit: BoxFit.fill,
-          imageUrl: book.volumeInfo!.imageLinks!.thumbnail as String,
+          imageUrl: book.volumeInfo?.imageLinks?.thumbnail ?? '',
           errorWidget: (context, url, error) => const ColoredBox(
             color: Colors.white38,
             child: Icon(Icons.image_not_supported_outlined),
