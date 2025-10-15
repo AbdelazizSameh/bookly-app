@@ -13,7 +13,7 @@ class SimilarBooksListView extends StatelessWidget {
         padding: EdgeInsets.only(left: 30, right: 12, top: 0),
         scrollDirection: Axis.horizontal,
         itemCount: 30,
-        itemBuilder: (context, index) => CustomBookItem(book: BookModel()),
+        itemBuilder: (context, index) => CustomBookImage(book: BookModel()),
         separatorBuilder: (BuildContext context, int index) =>
             SizedBox(width: 10),
       ),

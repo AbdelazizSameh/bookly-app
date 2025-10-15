@@ -18,9 +18,10 @@ class FeaturedBooksListView extends StatelessWidget {
             return ListView.separated(
               padding: EdgeInsets.symmetric(horizontal: 12),
               scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
               itemCount: state.books.length,
               itemBuilder: (context, index) =>
-                  CustomBookItem(book: state.books[index]),
+                  CustomBookImage(book: state.books[index]),
               separatorBuilder: (BuildContext context, int index) =>
                   const SizedBox(width: 12),
             );

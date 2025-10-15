@@ -1,3 +1,4 @@
+import 'package:bookly_app/Features/home/data/models/book_model/book_model.dart';
 import 'package:bookly_app/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,8 +7,9 @@ class BookRating extends StatelessWidget {
   const BookRating({
     super.key,
     this.mainAxisAlignment = MainAxisAlignment.start,
+    required this.model,
   });
-
+  final BookModel model;
   final MainAxisAlignment mainAxisAlignment;
 
   @override
@@ -24,10 +26,13 @@ class BookRating extends StatelessWidget {
             size: 14,
           ),
           Text(
-            '4.9',
+            '${model.volumeInfo?.averageRating ?? 0.0}',
             style: Styles.textStyle16.copyWith(fontWeight: FontWeight.bold),
           ),
-          const Text('(2390)', style: Styles.textStyle14),
+          Text(
+            '(${model.volumeInfo?.ratingsCount ?? 0})',
+            style: Styles.textStyle14,
+          ),
         ],
       ),
     );
