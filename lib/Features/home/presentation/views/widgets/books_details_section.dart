@@ -16,7 +16,7 @@ class BookDetailsSection extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          width: screenWidth * 0.38,
+          width: screenWidth * 0.4,
           child: CustomBookImage(book: book),
         ),
         const SizedBox(height: 43),
@@ -25,7 +25,6 @@ class BookDetailsSection extends StatelessWidget {
           textAlign: TextAlign.center,
           style: Styles.textStyle30.copyWith(fontWeight: FontWeight.w600),
         ),
-        const SizedBox(height: 6),
         Text(
           book.volumeInfo?.authors?[0] ?? "Unknown",
           textAlign: TextAlign.center,

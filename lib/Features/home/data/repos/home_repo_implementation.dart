@@ -55,12 +55,11 @@ class HomeRepoImplementation implements HomeRepo {
   }) async {
     try {
       var data = await apiService.get(
-        endPoint:
-            'volumes?Sorting=relevance&Filtering=free-ebooks&q=subject:clean+code',
+        endPoint: 'volumes?Sorting=relevance&Filtering=free-ebooks&q=$category',
       );
-      List<BookModel> booksList = (data['items'] as List)
-          .map((e) => BookModel.fromJson(e))
-          .toList();
+      List<BookModel> booksList = (data['items'] as List).map((e) {
+        return BookModel.fromJson(e);
+      }).toList();
 
       return right(booksList);
     } catch (e) {

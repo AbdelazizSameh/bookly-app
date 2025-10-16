@@ -11,18 +11,23 @@ class BooksDetailsViewBody extends StatelessWidget {
     return SafeArea(
       child: CustomScrollView(
         slivers: [
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: Column(
               children: [
-                const CustomBookDetailsAppBar(),
-                const BookDetailsSection(),
+                CustomBookDetailsAppBar(),
+                BookDetailsSection(),
+                SizedBox(height: 50),
               ],
             ),
           ),
-          SliverToBoxAdapter(
-            child: const Expanded(child: SizedBox(height: 50)),
+
+          const SliverFillRemaining(
+            hasScrollBody: false,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: SimilarBooksSection(),
+            ),
           ),
-          SliverToBoxAdapter(child: const SimilarBooksSection()),
         ],
       ),
     );
