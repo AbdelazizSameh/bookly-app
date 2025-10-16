@@ -1,6 +1,6 @@
+import 'package:bookly_app/Features/home/data/models/book_model/book_model.dart';
 import 'package:bookly_app/Features/home/presentation/manager/newest_books_cubit/newest_books_cubit.dart';
 import 'package:bookly_app/core/widgets/custom_error_widget.dart';
-import 'package:bookly_app/core/widgets/custom_loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'best_seller_book_item.dart';
@@ -26,7 +26,13 @@ class BestSellerBooksListView extends StatelessWidget {
               child: CustomErrorWidget(errMessage: state.errMessage),
             );
           } else {
-            return SliverFillRemaining(child: const CustomLoadingIndicator());
+            return SliverList.separated(
+              itemBuilder: (context, index) =>
+                  BestSellerBookItem(book: BookModel()),
+              separatorBuilder: (context, index) => const SizedBox(height: 20),
+              itemCount: 10,
+            );
+            ;
           }
         },
       ),
