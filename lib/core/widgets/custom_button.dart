@@ -9,7 +9,9 @@ class CustomButton extends StatelessWidget {
     required this.text,
     this.textColor,
     this.fontSize,
+    this.onTap,
   });
+  final void Function()? onTap;
   final Color? backgroundColor;
   final BorderRadiusGeometry? borderRadius;
   final String text;
@@ -21,7 +23,7 @@ class CustomButton extends StatelessWidget {
       child: SizedBox(
         height: 48,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: onTap,
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.symmetric(horizontal: 0),
             overlayColor: Colors.black,
