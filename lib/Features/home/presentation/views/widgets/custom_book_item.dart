@@ -6,7 +6,7 @@ import '../../../data/models/book_model/book_model.dart';
 
 class CustomBookImage extends StatelessWidget {
   const CustomBookImage({super.key, required this.book});
-  final BookModel? book;
+  final BookModel book;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -16,14 +16,17 @@ class CustomBookImage extends StatelessWidget {
         aspectRatio: 2.45 / 4,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(12),
-          child: CachedNetworkImage(
-            fit: BoxFit.fill,
-            imageUrl:
-                book?.volumeInfo?.imageLinks?.thumbnail ??
-                'https://files.tecnoblog.net/wp-content/uploads/2022/11/sascha-bosshard-et3fex4jibw-unsplash1-1060x795.jpg',
-            errorWidget: (context, url, error) => const ColoredBox(
-              color: Colors.white38,
-              child: Icon(Icons.image_not_supported_outlined),
+          child: Hero(
+            tag: book.etag!,
+            child: CachedNetworkImage(
+              fit: BoxFit.fill,
+              imageUrl:
+                  book.volumeInfo?.imageLinks?.thumbnail ??
+                  'https://files.tecnoblog.net/wp-content/uploads/2022/11/sascha-bosshard-et3fex4jibw-unsplash1-1060x795.jpg',
+              errorWidget: (context, url, error) => const ColoredBox(
+                color: Colors.white38,
+                child: Icon(Icons.image_not_supported_outlined),
+              ),
             ),
           ),
         ),
