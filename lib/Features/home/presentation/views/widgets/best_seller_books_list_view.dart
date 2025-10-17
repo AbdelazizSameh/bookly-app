@@ -32,7 +32,6 @@ class BestSellerBooksListView extends StatelessWidget {
               separatorBuilder: (context, index) => const SizedBox(height: 20),
               itemCount: 10,
             );
-            ;
           }
         },
       ),
