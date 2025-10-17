@@ -22,10 +22,10 @@ class HomeViewBody extends StatelessWidget {
               children: [
                 const CustomAppBar(),
                 BlocSelector<FeaturedBooksCubit, FeaturedBooksState, bool>(
-                  selector: (state) => state is FeaturedBooksSuccess,
+                  selector: (state) => state is FeaturedBooksLoading,
                   builder: (context, state) {
                     return Skeletonizer(
-                      enabled: !state,
+                      enabled: state,
                       child: const FeaturedBooksListView(),
                     );
                   },
@@ -40,10 +40,10 @@ class HomeViewBody extends StatelessWidget {
             ),
           ),
           BlocSelector<NewestBooksCubit, NewestBooksState, bool>(
-            selector: (state) => state is NewestBooksSuccess,
+            selector: (state) => state is NewestBooksLoading,
             builder: (context, state) {
               return Skeletonizer.sliver(
-                enabled: !state,
+                enabled: state,
                 child: const BestSellerBooksListView(),
               );
             },

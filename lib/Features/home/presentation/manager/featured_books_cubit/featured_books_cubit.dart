@@ -10,13 +10,24 @@ class FeaturedBooksCubit extends Cubit<FeaturedBooksState> {
   FeaturedBooksCubit(this.homeRepo) : super(FeaturedBooksInitial());
 
   final HomeRepo homeRepo;
+  int maxResult = 10;
+  int startIndex = 0;
+  List<BookModel> booksList = [];
 
   Future<void> fetchFeaturedBooks() async {
-    emit(FeaturedBooksLoading());
-    var result = await homeRepo.fetchFeaturedBooks();
+    // emit(FeaturedBooksInitial());
+    if (startIndex == 0) emit(FeaturedBooksLoading());
+
+    var result = await homeRepo.fetchFeaturedBooks(
+      startIndex: startIndex,
+      maxResult: maxResult,
+    );
     result.fold(
       (failure) => emit(FeaturedBooksFailure(errMessage: failure.errorMessage)),
-      (books) => emit(FeaturedBooksSuccess(books: books)),
+      (books) {
+        booksList.addAll(books);
+        emit(FeaturedBooksSuccess(books: List.from(booksList)));
+      },
     );
   }
 }
