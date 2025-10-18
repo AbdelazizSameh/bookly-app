@@ -1,4 +1,3 @@
-import 'package:bookly_app/Features/home/data/models/book_model/book_model.dart';
 import 'package:bookly_app/Features/home/presentation/manager/featured_books_cubit/featured_books_cubit.dart';
 import 'package:bookly_app/core/widgets/custom_error_widget.dart';
 import 'package:flutter/material.dart';
@@ -17,11 +16,11 @@ class _FeaturedBooksListViewState extends State<FeaturedBooksListView> {
   final ScrollController _scrollController = ScrollController();
   @override
   void initState() {
-    scrollMethod();
+    scrollAndPaginationMethod();
     super.initState();
   }
 
-  void scrollMethod() {
+  void scrollAndPaginationMethod() {
     _scrollController.addListener(() async {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
@@ -45,16 +44,15 @@ class _FeaturedBooksListViewState extends State<FeaturedBooksListView> {
       child: BlocBuilder<FeaturedBooksCubit, FeaturedBooksState>(
         builder: (context, state) {
           if (state is FeaturedBooksSuccess) {
-            var cubit = context.read<FeaturedBooksCubit>();
             return ListView.separated(
               controller: _scrollController,
               padding: EdgeInsets.symmetric(horizontal: 12),
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
-              itemCount: cubit.booksList.length,
+              itemCount: state.books.length,
               itemBuilder: (context, index) {
-                if (index < cubit.booksList.length - 1) {
-                  return CustomBookImage(book: cubit.booksList[index]);
+                if (index < state.books.length - 1) {
+                  return CustomBookImage(book: state.books[index]);
                 } else {
                   return const Center(child: CircularProgressIndicator());
                 }
