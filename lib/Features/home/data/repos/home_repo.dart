@@ -8,7 +8,10 @@ abstract class HomeRepo {
     required int startIndex,
     required int maxResult,
   });
-  Future<Either<Failure, List<BookModel>>> fetchNewestBooks();
+  Future<Either<Failure, List<BookModel>>> fetchNewestBooks({
+    required int startIndex,
+    required int maxResult,
+  });
   Future<Either<Failure, List<BookModel>>> fetchSimilarBooks({
     required String category,
   });

@@ -15,9 +15,7 @@ class FeaturedBooksCubit extends Cubit<FeaturedBooksState> {
   List<BookModel> booksList = [];
 
   Future<void> fetchFeaturedBooks() async {
-    // emit(FeaturedBooksInitial());
     if (startIndex == 0) emit(FeaturedBooksLoading());
-
     var result = await homeRepo.fetchFeaturedBooks(
       startIndex: startIndex,
       maxResult: maxResult,

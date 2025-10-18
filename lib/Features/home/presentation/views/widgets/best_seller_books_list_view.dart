@@ -16,8 +16,14 @@ class BestSellerBooksListView extends StatelessWidget {
         builder: (context, state) {
           if (state is NewestBooksSuccess) {
             return SliverList.separated(
-              itemBuilder: (context, index) =>
-                  BestSellerBookItem(book: state.books[index]),
+              itemBuilder: (context, index) {
+                if (index < state.books.length - 1) {
+                  return BestSellerBookItem(book: state.books[index]);
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              },
+
               separatorBuilder: (context, index) => const SizedBox(height: 20),
               itemCount: state.books.length,
             );

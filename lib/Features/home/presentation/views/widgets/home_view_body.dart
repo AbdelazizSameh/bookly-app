@@ -7,14 +7,54 @@ import '../../manager/newest_books_cubit/newest_books_cubit.dart';
 import 'best_seller_books_list_view.dart';
 import 'custom_app_bar.dart';
 import 'featured_books_list_view.dart';
+import 'package:bookly_app/core/utils/styles.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+import '../../manager/featured_books_cubit/featured_books_cubit.dart';
+import '../../manager/newest_books_cubit/newest_books_cubit.dart';
+import 'best_seller_books_list_view.dart';
+import 'custom_app_bar.dart';
+import 'featured_books_list_view.dart';
 
-class HomeViewBody extends StatelessWidget {
+class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
+
+  @override
+  State<HomeViewBody> createState() => _HomeViewBodyState();
+}
+
+class _HomeViewBodyState extends State<HomeViewBody> {
+  final ScrollController _scrollController = ScrollController();
+  @override
+  void initState() {
+    scrollAndPaginationMethod();
+    super.initState();
+  }
+
+  void scrollAndPaginationMethod() {
+    _scrollController.addListener(() async {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        var newestCubit = context.read<NewestBooksCubit>();
+        newestCubit.startIndex += newestCubit.maxResult;
+        newestCubit.fetchNewestBooks();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: CustomScrollView(
+        controller: _scrollController,
+        physics: const BouncingScrollPhysics(),
         slivers: [
           SliverToBoxAdapter(
             child: Column(
@@ -23,9 +63,9 @@ class HomeViewBody extends StatelessWidget {
                 const CustomAppBar(),
                 BlocSelector<FeaturedBooksCubit, FeaturedBooksState, bool>(
                   selector: (state) => state is FeaturedBooksLoading,
-                  builder: (context, state) {
+                  builder: (context, isLoading) {
                     return Skeletonizer(
-                      enabled: state,
+                      enabled: isLoading,
                       child: const FeaturedBooksListView(),
                     );
                   },
@@ -33,7 +73,7 @@ class HomeViewBody extends StatelessWidget {
                 const SizedBox(height: 52),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Text('Best Seller', style: Styles.textStyle18),
+                  child: Text('Newest books', style: Styles.textStyle18),
                 ),
                 const SizedBox(height: 21),
               ],
@@ -41,9 +81,9 @@ class HomeViewBody extends StatelessWidget {
           ),
           BlocSelector<NewestBooksCubit, NewestBooksState, bool>(
             selector: (state) => state is NewestBooksLoading,
-            builder: (context, state) {
+            builder: (context, isLoading) {
               return Skeletonizer.sliver(
-                enabled: state,
+                enabled: isLoading,
                 child: const BestSellerBooksListView(),
               );
             },
