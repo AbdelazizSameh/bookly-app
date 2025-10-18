@@ -14,10 +14,10 @@ class CustomBookImage extends StatelessWidget {
           GoRouter.of(context).push(RoutePath.kDetailsView, extra: book),
       child: AspectRatio(
         aspectRatio: 2.45 / 4,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(12),
-          child: Hero(
-            tag: book.etag!,
+        child: Hero(
+          tag: book.etag!,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
             child: CachedNetworkImage(
               fit: BoxFit.fill,
               imageUrl:
