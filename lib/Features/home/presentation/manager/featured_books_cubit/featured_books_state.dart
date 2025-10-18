@@ -21,4 +21,6 @@ final class FeaturedBooksSuccess extends FeaturedBooksState {
   final List<BookModel> books;
 
   const FeaturedBooksSuccess({required this.books});
+  @override
+  List<Object> get props => [books];
 }

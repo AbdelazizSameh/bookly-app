@@ -25,10 +25,9 @@ class _FeaturedBooksListViewState extends State<FeaturedBooksListView> {
     _scrollController.addListener(() async {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        var featuredCubit = BlocProvider.of<FeaturedBooksCubit>(context);
+        var featuredCubit = context.read<FeaturedBooksCubit>();
         featuredCubit.startIndex += featuredCubit.maxResult;
-        await featuredCubit.fetchFeaturedBooks();
-        setState(() {});
+        featuredCubit.fetchFeaturedBooks();
       }
     });
   }
@@ -41,21 +40,21 @@ class _FeaturedBooksListViewState extends State<FeaturedBooksListView> {
 
   @override
   Widget build(BuildContext context) {
-    var featuredCubit = BlocProvider.of<FeaturedBooksCubit>(context);
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * 0.3,
       child: BlocBuilder<FeaturedBooksCubit, FeaturedBooksState>(
         builder: (context, state) {
           if (state is FeaturedBooksSuccess) {
+            var cubit = context.read<FeaturedBooksCubit>();
             return ListView.separated(
               controller: _scrollController,
               padding: EdgeInsets.symmetric(horizontal: 12),
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
-              itemCount: featuredCubit.booksList.length,
+              itemCount: cubit.booksList.length,
               itemBuilder: (context, index) {
-                if (index < featuredCubit.booksList.length - 1) {
-                  return CustomBookImage(book: featuredCubit.booksList[index]);
+                if (index < cubit.booksList.length - 1) {
+                  return CustomBookImage(book: cubit.booksList[index]);
                 } else {
                   return const Center(child: CircularProgressIndicator());
                 }

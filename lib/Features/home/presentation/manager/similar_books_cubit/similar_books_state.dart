@@ -21,4 +21,6 @@ final class SimilarBooksSuccess extends SimilarBooksState {
   final List<BookModel> books;
 
   const SimilarBooksSuccess({required this.books});
+  @override
+  List<Object> get props => [books];
 }

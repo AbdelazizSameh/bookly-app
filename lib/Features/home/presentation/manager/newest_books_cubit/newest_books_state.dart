@@ -21,4 +21,6 @@ final class NewestBooksSuccess extends NewestBooksState {
   final List<BookModel> books;
 
   const NewestBooksSuccess({required this.books});
+  @override
+  List<Object> get props => [books];
 }
