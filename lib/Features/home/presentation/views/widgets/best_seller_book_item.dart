@@ -15,7 +15,7 @@ class BestSellerBookItem extends StatelessWidget {
   final BookModel book;
   @override
   Widget build(BuildContext context) {
-    var bookState = BlocProvider.of<NewestBooksCubit>(context).state;
+    final bookState = BlocProvider.of<NewestBooksCubit>(context).state;
 
     return GestureDetector(
       onTap: () =>
@@ -25,7 +25,7 @@ class BestSellerBookItem extends StatelessWidget {
         child: Row(
           children: [
             bookState is NewestBooksLoading
-                ? PlaceholderHorizontalListViewItem()
+                ? const PlaceholderHorizontalListViewItem()
                 : CustomBookImage(book: book),
             const SizedBox(width: 30),
             Expanded(

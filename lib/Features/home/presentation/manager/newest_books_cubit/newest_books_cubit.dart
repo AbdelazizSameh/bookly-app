@@ -24,6 +24,7 @@ class NewestBooksCubit extends Cubit<NewestBooksState> {
       (books) {
         booksList.addAll(books);
         emit(NewestBooksSuccess(books: List.from(booksList)));
+        startIndex += maxResult;
       },
     );
   }

@@ -27,8 +27,7 @@ class _SimilarBooksListViewState extends State<SimilarBooksListView> {
     _scrollController.addListener(() async {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        var featuredCubit = context.read<SimilarBooksCubit>();
-        featuredCubit.startIndex += featuredCubit.maxResult;
+        final featuredCubit = context.read<SimilarBooksCubit>();
         featuredCubit.fetchSimilarBooks(
           category: book.volumeInfo?.categories?[0] ?? "programming",
         );

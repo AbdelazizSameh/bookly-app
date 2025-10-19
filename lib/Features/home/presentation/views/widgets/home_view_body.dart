@@ -7,15 +7,6 @@ import '../../manager/newest_books_cubit/newest_books_cubit.dart';
 import 'best_seller_books_list_view.dart';
 import 'custom_app_bar.dart';
 import 'featured_books_list_view.dart';
-import 'package:bookly_app/core/utils/styles.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:skeletonizer/skeletonizer.dart';
-import '../../manager/featured_books_cubit/featured_books_cubit.dart';
-import '../../manager/newest_books_cubit/newest_books_cubit.dart';
-import 'best_seller_books_list_view.dart';
-import 'custom_app_bar.dart';
-import 'featured_books_list_view.dart';
 
 class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
@@ -36,8 +27,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
     _scrollController.addListener(() async {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        var newestCubit = context.read<NewestBooksCubit>();
-        newestCubit.startIndex += newestCubit.maxResult;
+        final newestCubit = context.read<NewestBooksCubit>();
         newestCubit.fetchNewestBooks();
       }
     });

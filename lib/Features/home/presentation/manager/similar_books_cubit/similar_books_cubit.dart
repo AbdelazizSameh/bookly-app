@@ -25,6 +25,7 @@ class SimilarBooksCubit extends Cubit<SimilarBooksState> {
       (books) {
         booksList.addAll(books);
         emit(SimilarBooksSuccess(books: List.from(booksList)));
+        startIndex += maxResult;
       },
     );
   }

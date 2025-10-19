@@ -24,8 +24,7 @@ class _FeaturedBooksListViewState extends State<FeaturedBooksListView> {
     _scrollController.addListener(() async {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        var featuredCubit = context.read<FeaturedBooksCubit>();
-        featuredCubit.startIndex += featuredCubit.maxResult;
+        final featuredCubit = context.read<FeaturedBooksCubit>();
         featuredCubit.fetchFeaturedBooks();
       }
     });

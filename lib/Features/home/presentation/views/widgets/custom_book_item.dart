@@ -15,7 +15,7 @@ class CustomBookImage extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 2.45 / 4,
         child: Hero(
-          tag: book.etag!,
+          tag: book.etag ?? '${book.hashCode}',
           child: ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: CachedNetworkImage(

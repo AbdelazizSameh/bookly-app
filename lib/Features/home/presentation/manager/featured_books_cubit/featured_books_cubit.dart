@@ -25,6 +25,7 @@ class FeaturedBooksCubit extends Cubit<FeaturedBooksState> {
       (books) {
         booksList.addAll(books);
         emit(FeaturedBooksSuccess(books: List.from(booksList)));
+        startIndex += maxResult;
       },
     );
   }
